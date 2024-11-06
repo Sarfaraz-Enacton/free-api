@@ -15,7 +15,11 @@
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  @apply bg-background text-foreground font-primary leading-tight;
+}
+
+@layer components {
+  .transition-ease {
+    @apply transition-[ease] ease-[ease] duration-500;
+  }
 }

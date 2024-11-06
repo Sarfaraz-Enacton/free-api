@@ -8,6 +8,14 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        primary: ["var(--font-geist-sans)"],
+        secondary: ["var(--font-geist-mono)"],
+      },
+      container: {
+        center: true,
+        padding: "1rem",
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
