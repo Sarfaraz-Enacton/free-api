@@ -1,3 +1,5 @@
+import Cookies from "js-cookie";
+
 export const login = async (username: string, password: string) => {
   const response = await fetch("https://api.freeapi.app/api/v1/users/login", {
     method: "POST",
@@ -32,7 +34,9 @@ export const register = async (
   const data = await response.json();
   return data;
 };
+
 export const getUser = async () => {
+  const authToken = Cookies.get("auth_token");
   const response = await fetch(
     "https://api.freeapi.app/api/v1/users/current-user",
     {
@@ -40,11 +44,40 @@ export const getUser = async () => {
       headers: {
         accept: "application/json",
         "content-type": "application/json",
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzJiNWE4OTg2NzExM2M5NDFmMDdkNGMiLCJlbWFpbCI6InVzZXIuZW1haWxAZG9tYWluLmNvbSIsInVzZXJuYW1lIjoiZG9lam9obiIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTczMDkwMDQ3MCwiZXhwIjoxNzMwOTg2ODcwfQ.37g9mKJj5R2dqtxMm55d0koTM6_4ujvdzqvPB019JDU`,
+        Authorization: `Bearer ${authToken}`,
       },
     }
   );
   const data = await response.json();
-  console.log(data);
   return data;
 };
+
+// export const getUser = async () => {
+//   const authToken = Cookies.get("auth_token");
+//   try {
+//     const response = await fetch(
+//       "https://api.freeapi.app/api/v1/users/current-user",
+//       {
+//         method: "GET",
+//         headers: {
+//           accept: "application/json",
+//           "content-type": "application/json",
+//           Authorization: `Bearer ${authToken}`,
+//         },
+//       }
+//     );
+
+//     if (!response.ok) {
+//       // Handle HTTP errors
+//       const errorData = await response.json();
+//       throw new Error(errorData.message || "Failed to fetch user data");
+//     }
+
+//     const data = await response.json();
+//     console.log(data);
+//     return data;
+//   } catch (error) {
+//     console.error("Error fetching user data:", error);
+//     return null; // Return the error message
+//   }
+// };

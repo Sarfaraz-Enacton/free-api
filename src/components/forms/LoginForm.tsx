@@ -6,7 +6,8 @@ import { login } from "@/api/auth";
 import { useFormik } from "formik";
 import { logInSchema } from "@/schema";
 import { toast } from "react-toastify";
-
+import Cookies from "js-cookie";
+import { routes } from "@/routes-config";
 const LoginForm = () => {
   const [loading, setLoading] = useState(false);
   const formik = useFormik({
@@ -23,6 +24,13 @@ const LoginForm = () => {
         if (data?.message) {
           if (data?.success) {
             toast.success(data.message);
+            Cookies.set("auth_token", data?.data?.accessToken, {
+              secure: false,
+              httpOnly: true,
+            });
+            setTimeout(() => {
+              window.location.href = routes.home;
+            }, 2000);
           } else {
             toast.error(data.message);
           }
@@ -30,6 +38,7 @@ const LoginForm = () => {
           toast.error("An error occurred during login.");
         }
       } catch (error) {
+        console.log(error);
         toast.error("An error occurred during login.");
       } finally {
         setLoading(false);

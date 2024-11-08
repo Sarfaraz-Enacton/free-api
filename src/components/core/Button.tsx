@@ -100,7 +100,7 @@ export default function Button({
         </button>
       ) : (
         <Link
-          prefetch={false}
+          prefetch={true}
           onClick={onClick}
           href={url || "/"}
           className={twMerge(

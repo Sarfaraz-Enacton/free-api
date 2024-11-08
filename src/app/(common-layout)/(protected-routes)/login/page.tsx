@@ -1,7 +1,6 @@
 import LoginForm from "@/components/forms/LoginForm";
-import React from "react";
 
-const page = () => {
+const page = async () => {
   return (
     <div className="py-10">
       <LoginForm />
