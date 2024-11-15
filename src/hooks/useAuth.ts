@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 const useAuth = () => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null);
-  const [data, setData] = useState<boolean | null>(null);
+  const [data, setData] = useState<any>(null);
   useEffect(() => {
     const checkUser = async () => {
       const { data, success } = await getUser();

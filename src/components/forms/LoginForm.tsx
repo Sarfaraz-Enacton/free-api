@@ -26,7 +26,7 @@ const LoginForm = () => {
             toast.success(data.message);
             Cookies.set("auth_token", data?.data?.accessToken, {
               secure: false,
-              httpOnly: true,
+              // httpOnly: true,
             });
             setTimeout(() => {
               window.location.href = routes.home;

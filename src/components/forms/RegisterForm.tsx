@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Input from "../core/Input";
 import Button from "../core/Button";
-import { register } from "@/api/auth";
+import { login, register } from "@/api/auth";
 import { useFormik } from "formik";
 import { registerSchema } from "@/schema";
 import { toast } from "react-toastify";
@@ -29,7 +29,8 @@ const RegisterForm = () => {
         console.log(data);
         if (data?.message) {
           if (data?.success) {
-            toast.error(data.message);
+            toast.success(data.message);
+            const logData = await login(values.username.toLowerCase(), values.password);
           } else {
             data.errors[0]
               ? toast.error(data.errors[0].role)
